@@ -1,5 +1,5 @@
 # teamable-app
-This is a demo project fo IT begginers course
+This is a demo project for the IT begginers course
 
 ### To run the tests execute
 
