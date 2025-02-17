@@ -1,21 +1,26 @@
+// The required modules are imported
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const { MongoClient } = require('mongodb')
 const { isInvalidEmail, isEmptyPayload } = require('./validator')
 
+// Create constants for environment variables and check if the app is in development mode
 const { DB_USER, DB_PASS, DEV } = process.env
 console.log(DEV)
 
+// Create a new MongoClient
 const dbAddress = '127.0.0.1:27017'
 const url = DEV ? `mongodb://${dbAddress}` : `mongodb://${DB_USER}:${DB_PASS}@${dbAddress}?authSource=company_db`
 const client = new MongoClient(url)
 const dbName = 'company_db'
 const collName = 'employees'
 
+// Middleware to parse incoming requests with JSON payloads
 app.use(bodyParser.json())
 app.use('/', express.static(__dirname + '/dist'))
 
+// Getting the information from the database
 app.get('/get-profile', async function (req, res) {
     // connect to mongodb database
     await client.connect()
@@ -41,6 +46,7 @@ app.get('/get-profile', async function (req, res) {
     res.send(response)
 })
 
+// Updating the information in the database
 app.post('/update-profile', async function (req, res) {
     const payload = req.body
     console.log(payload)
@@ -66,10 +72,12 @@ app.post('/update-profile', async function (req, res) {
     }
 })
 
+// Checking that the application is running on port 3000
 const server = app.listen(3000, function () {
     console.log("app listening on port 3000")
 })
 
+// Exporting the app and server for testing purposes
 module.exports = {
     app,
     server
