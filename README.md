@@ -6,9 +6,10 @@ Link to the course description: https://www.techworld-with-nana.com/it-beginners
 
     npm run build
 
-### To start the application, execute
+### To start the application, execute one of the following commands
 
     node server.js
+    npm run start
 
 ### To run the tests execute
 
