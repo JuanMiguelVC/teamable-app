@@ -1,5 +1,6 @@
 # teamable-app
-This is a demo project fo IT begginers course
+This is a demo project for the IT begginers course from Techworld with Nana
+Link to the course description: https://www.techworld-with-nana.com/it-beginners-course
 
 ### To run the tests execute
 
