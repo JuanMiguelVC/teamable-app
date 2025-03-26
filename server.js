@@ -52,7 +52,7 @@ app.post('/update-profile', async function (req, res) {
     console.log(payload)
 
     if (isEmptyPayload(payload) || isInvalidEmail(payload)) {
-        res.send({ error: "invalid payload. Couldn't update user profile data" })
+        res.send({ error: "Payload is empty. User profile was not updated succesfully" })
     } else {
         // connect to mongodb database
         await client.connect()
@@ -68,7 +68,7 @@ app.post('/update-profile', async function (req, res) {
         await collection.updateOne({ id: 1 }, updatedValues, { upsert: true })
         client.close()
 
-        res.send({ info: "user profile data updated successfully" })
+        res.send({ info: "Profile updated successfully" })
     }
 })
 
