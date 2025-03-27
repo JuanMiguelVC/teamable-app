@@ -5,13 +5,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
-
-name: Run tests with authentication
-
-on: [push]
+    branches: ["main"]
 
 jobs:
   build:
@@ -19,30 +15,30 @@ jobs:
     strategy:
       matrix:
         node-version: [20.x, 22.x]
-        mongodb-version: ['6.0', '7.0', '8.0']
+        mongodb-version: ["6.0", "7.0", "8.0"]
 
     steps:
-    - name: Git checkout
-      uses: actions/checkout@v4
+      - name: Git checkout
+        uses: actions/checkout@v4
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: Start MongoDB
-      uses: supercharge/mongodb-github-action@1.12.0
-      with:
-        mongodb-version: ${{ matrix.mongodb-version }}
-        mongodb-username: admin
-        mongodb-password: adminpass
-        mongodb-db: company_db
-        mongodb-collection: employees
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.12.0
+        with:
+          mongodb-version: ${{ matrix.mongodb-version }}
+          mongodb-username: admin
+          mongodb-password: adminpass
+          mongodb-db: company_db
+          mongodb-collection: employees
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Run tests
-      run: npm test
-      env:
-        CI: true
+      - name: Run tests
+        run: npm test
+        env:
+          CI: true
